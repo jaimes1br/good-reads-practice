@@ -1,0 +1,19 @@
+<div 
+    class="d-flex flex-column px-2 py-1 animate__animated tx"
+    [ngClass]="{ 'animate__bounceOut': isSelected, 'preuba': isSelected}">
+    <img class="mx-auto my-1 book-img" [src]="book.cover" [alt]="book.title">
+    <div class="px-2">
+        <p class="mt-2 mb-0 text-truncate"><strong>{{book.title}}</strong></p>
+        <div class="d-flex align-items-center book-autor-container">
+            <p class="mb-0 flex-grow-1 text-truncate">{{book.author.name}}</p>
+            <span 
+                class="material-icons book-autor-bookmark"  
+                (click)="onSelectedBook()">
+                    {{ isSelected ? 'bookmark' : 'bookmark_border' }}
+            </span>
+        </div>
+        <p class="mb-0 book-genre" >
+            {{book.genre}}
+        </p>
+    </div>
+</div>
