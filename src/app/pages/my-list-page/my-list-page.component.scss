@@ -1,0 +1,14 @@
+@import '../../../vars.scss';
+
+.btn-orange{
+    background-color: $orange-color;
+    border-color: $orange-color;
+
+    &:hover{
+        opacity: 0.8;
+    }
+
+    &:focus,&:active{
+        outline: none;
+    }
+}
