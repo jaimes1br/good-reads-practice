@@ -1,33 +1,7 @@
 @import '../../../vars.scss';
 
-.divider{
-
-    &-main{
-        margin-block: 0;
-        margin-inline: 2%;
-    }
-
-    &-v{
-        display: inline-block;
-        height: auto; 
-        margin-inline: 10px; 
-        width: 1px;         
-    }
-}
-
 .icon-filter{
     color: $black-color;
     align-self: center;
 }
 
-.text-filter{
-    opacity: 0.7;
-}
-
-.filter-section,.books-section{
-    flex: 1;
-}
-
-.text-notFound{
-    font-size: 64px;
-}

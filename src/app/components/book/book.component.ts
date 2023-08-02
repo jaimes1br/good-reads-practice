@@ -10,7 +10,9 @@ import { BookService } from '../../services/book.service';
 })
 export class BookComponent implements OnInit {
    
-  isSelected: boolean = false;
+  isRemoved: boolean = false;
+  
+  @Input() isSelected: boolean = false;
   @Input() book: Book = {    
       title:    '',
       pages:    0,
@@ -32,10 +34,12 @@ export class BookComponent implements OnInit {
 
   onSelectedBook(){
     this.isSelected = !this.isSelected;
+    this.isRemoved = true;
     setTimeout(() => {
       (this.isSelected)
         ? this.bookService.addBookOnMyList(this.book.ISBN)
         : this.bookService.removeBookOnMyList(this.book.ISBN)
+      
     }, 900);
   }
 

@@ -10,6 +10,9 @@ import { BooksPagesComponent } from './pages/books-pages/books-pages.component';
 import { GenreItemComponent } from './components/genre-item/genre-item.component';
 import { GenreListComponent } from './components/genre-list/genre-list.component';
 import { BookComponent } from './components/book/book.component';
+import { MyListPageComponent } from './pages/my-list-page/my-list-page.component';
+import { DragDropBooksComponent } from './components/drag-drop-books/drag-drop-books.component';
+import { BookCardComponent } from './components/drag-drop-books/book-card/book-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { BookComponent } from './components/book/book.component';
     GenreItemComponent,
     GenreListComponent,
     BookComponent,
+    MyListPageComponent,
+    DragDropBooksComponent,
+    BookCardComponent,
   ],
   imports: [
     BrowserModule,

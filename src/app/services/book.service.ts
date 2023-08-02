@@ -3,24 +3,35 @@ import { of, tap, BehaviorSubject ,map, Observable } from 'rxjs';
 import { BOOKS } from '../shared/mocks/books';
 import { BooksNumbers, Library, LibraryElement } from '../shared/interfaces/Books';
 import { DataGenre } from '../shared/interfaces/DataGenre';
+import { MyListBooks } from '../shared/interfaces/StorageBooks';
  
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
   
-  private myList: string[] = [];
+  private myListISBN: string[] = []
+  private myBookList: MyListBooks = {
+    pending: [],
+    reading: [],
+    read: []
+  };
+
   librarySubject = new BehaviorSubject<Library | null>(null);
   library$: Observable<Library | null> = this.librarySubject.asObservable(); 
+ 
   availableBooksSubject = new BehaviorSubject<Library | null>(null);
   availableBooks$: Observable<Library | null> = this.availableBooksSubject.asObservable();
  
+  myBooksListSubject = new BehaviorSubject<MyListBooks | null>(null);
+  myBooksList$: Observable<MyListBooks | null> = this.myBooksListSubject.asObservable();
+
   genresListSubject = new BehaviorSubject<DataGenre[]>([]);
   genresList$: Observable<DataGenre[]> = this.genresListSubject.asObservable();
   
   bookNumbersSubject = new BehaviorSubject<BooksNumbers>({available: 0,myList: 0});
   bookNumbers$: Observable<BooksNumbers> = this.bookNumbersSubject.asObservable();
-  
+
   constructor() { }
   
   getAllBooks(): Observable<LibraryElement[]>{
@@ -41,51 +52,96 @@ export class BookService {
           genderList[0].isSelected = true; 
           this.genresListSubject.next(genderList);
         }),
-        tap(() => this.getBookMyList()),
+        tap(() => this.getMyListISBN()),
+        tap(() => this.updateAvailableList()),
         tap(() => this.setBooksNumbers())
       );
   }
   
-  getBookMyList(){
-    const myList = localStorage.getItem('myList');
-    if(!!myList){
-      this.myList = JSON.parse(localStorage.getItem('myList')!);
-      const tempBooks = this.librarySubject.getValue();
-      if(!!tempBooks){
-        const tempAll = tempBooks['library'].slice();
-        const available = tempAll.filter(book => !myList.includes(book.book.ISBN));
-        this.availableBooksSubject.next({library: [...available]});
-      }       
+  getMyListISBN(){  
+    const localListISBN = localStorage.getItem('myListISBN');
+    
+    if(!!localListISBN){
+      this.myListISBN = JSON.parse(localListISBN);
+      this.updateAvailableList(); 
     }else{
       this.availableBooksSubject.next(this.librarySubject.getValue());
+      this.myListISBN = [];
+    }
+  }
+
+  updateAvailableList(){
+    const tempAllBooks = this.librarySubject.getValue();
+    
+    if(!!tempAllBooks){
+      const tempAll = tempAllBooks['library'].slice();
+      const available = tempAll.filter(book => !this.myListISBN.includes(book.book.ISBN));
+      this.availableBooksSubject.next({library: [...available]});
     }
   }
   
   addBookOnMyList(isbn: string): void{
-    this.myList.push(isbn);
-    localStorage.setItem('myList',JSON.stringify(this.myList));
-
-    let available = this.availableBooksSubject.getValue()!['library'].slice();
-    available = available.filter(book => book.book.ISBN !== isbn);
-    this.availableBooksSubject.next({library: [...available]});
+    this.myListISBN.push(isbn);
+    localStorage.setItem('myListISBN',JSON.stringify(this.myListISBN));
+    
+    this.updateMyBookListLocalStorage(isbn);
+    this.updateAvailableList();
     this.setBooksNumbers();
   }
 
   removeBookOnMyList(isbn: string): void{
-    this.myList = this.myList.filter(isbnElement => isbnElement !== isbn);
-    localStorage.setItem('myList',JSON.stringify(this.myList));
-    this.setBooksNumbers();
+    console.log('hola remove ' + isbn);
+    this.myListISBN = this.myListISBN.filter(isbnNum => isbnNum !== isbn);
+    localStorage.setItem('myListISBN',JSON.stringify(this.myListISBN));
+
+
+    this.myBookList.pending = this.myBookList.pending.filter(book => book.book.ISBN !== isbn);
+    this.myBookList.reading = this.myBookList.reading.filter(book => book.book.ISBN !== isbn);
+    this.myBookList.read    = this.myBookList.read.filter(book => book.book.ISBN !== isbn);
+
+    localStorage.setItem('myBookList',JSON.stringify(this.myBookList));
+    this.myBooksListSubject.next(this.myBookList);
     
+    this.updateAvailableList();
+    this.setBooksNumbers();
+  }
+
+  updateMyBookListLocalStorage(isbn: string): void{
+    const tempAllBooks = this.librarySubject.getValue();
+    
+    if(!!tempAllBooks){
+      const tempAll = tempAllBooks['library'].slice();
+      const book = tempAll.filter(book => book.book.ISBN === isbn);
+
+      this.myBookList.pending.push(...book);
+      localStorage.setItem('myBookList',JSON.stringify(this.myBookList));
+    }
   }
 
   setBooksNumbers(){
     const total = this.librarySubject.getValue()!['library'].slice().length;
-    const totalMyList = this.myList.length; 
+    const totalMyList = this.myListISBN.length; 
 
     this.bookNumbersSubject.next({
       available: total - totalMyList,
       myList: totalMyList
     });
+  }
+
+  getMyBookListLocal(){
+    const myBookListLocal = localStorage.getItem('myBookList');
+    
+    if(!!myBookListLocal){
+      this.myBookList = JSON.parse(myBookListLocal);
+    }else{
+      this.myBookList = {
+        pending: [],
+        reading: [],
+        read: []
+      }
+    }
+
+    this.myBooksListSubject.next(this.myBookList);
   }
 }
 
