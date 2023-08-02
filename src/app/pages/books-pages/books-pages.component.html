@@ -23,7 +23,7 @@
             </h5>
             <p class="ms-3">{{totalMyList}} en la lista de lectura</p>
         </div>
-        <div class="mx-1 row">
+        <div class="px-2 mb-3 row scroll">
             <goodReads-book 
                 class="col-3" 
                 *ngFor="let book of listAvailableBooks" 
@@ -38,7 +38,7 @@
                     <h4 class="mt-2 text-filter">
                         No hay libros dispobibles de {{filterName}}
                     </h4>
-            </div>
+        </div>
         </div>
     </section>
 </main>
