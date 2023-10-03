@@ -10,6 +10,7 @@ import { MyListBooks } from '../shared/interfaces/StorageBooks';
 })
 export class BookService {
   
+  private maxPages: number = 0;
   private myListISBN: string[] = []
   private myBookList: MyListBooks = {
     pending: [],
@@ -29,7 +30,7 @@ export class BookService {
   genresListSubject = new BehaviorSubject<DataGenre[]>([]);
   genresList$: Observable<DataGenre[]> = this.genresListSubject.asObservable();
   
-  bookNumbersSubject = new BehaviorSubject<BooksNumbers>({available: 0,myList: 0});
+  bookNumbersSubject = new BehaviorSubject<BooksNumbers>({available: 0,myList: 0, maxPages: 0});
   bookNumbers$: Observable<BooksNumbers> = this.bookNumbersSubject.asObservable();
 
   constructor() { }
@@ -75,7 +76,13 @@ export class BookService {
     
     if(!!tempAllBooks){
       const tempAll = tempAllBooks['library'].slice();
-      const available = tempAll.filter(book => !this.myListISBN.includes(book.book.ISBN));
+      let pagesNumber: number[] = [];
+      const available = tempAll.filter(({book} )=> {
+        pagesNumber.push(book.pages);
+        return !this.myListISBN.includes(book.ISBN);
+      });
+
+      this.maxPages = Math.max(...pagesNumber);
       this.availableBooksSubject.next({library: [...available]});
     }
   }
@@ -124,7 +131,8 @@ export class BookService {
 
     this.bookNumbersSubject.next({
       available: total - totalMyList,
-      myList: totalMyList
+      myList: totalMyList,
+      maxPages: this.maxPages
     });
   }
 
@@ -143,5 +151,6 @@ export class BookService {
 
     this.myBooksListSubject.next(this.myBookList);
   }
+
 }
 
