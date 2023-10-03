@@ -20,11 +20,14 @@ export class BooksPagesComponent implements OnInit, OnDestroy{
   
   isFilter: boolean = false;
   totalBooksGenre: number = 0;
-  filterName: string = '';
+  filterName: string = 'Todos';
 
   genresSub!: Subscription;
   librarySub!: Subscription;
   booksNumbersSub!: Subscription;
+
+  maxPages: number = 0
+  numberOfPages: number = 0;
 
   constructor(private bookService: BookService){}
  
@@ -42,23 +45,29 @@ export class BooksPagesComponent implements OnInit, OnDestroy{
       }  
     });
 
-    this.booksNumbersSub = this.bookService.bookNumbers$.subscribe(({available,myList}) => {
+    this.booksNumbersSub = this.bookService.bookNumbers$.subscribe(({available,myList,maxPages}) => {
       this.totalAvailable = available;
       this.totalMyList = myList;
+      this.numberOfPages = maxPages
+      this.maxPages = maxPages;
     });
   }
 
   onFilterChange(filter: string){
+    const tempAvailable = this.library.filter(({book}) => book.pages <= this.numberOfPages);;
+    this.totalAvailable = tempAvailable.length;
+    
+    this.filterName = filter
+
     if(filter !== 'Todos'){
-      const tempList = this.library.filter(book => book.book.genre === filter);
-      this.listAvailableBooks = tempList.slice();
+      this.listAvailableBooks = tempAvailable.filter(({book}) => book.genre === filter);
       this.totalBooksGenre = this.listAvailableBooks.length;
-      this.filterName = filter
       this.isFilter = true;
     }else{
-      this.listAvailableBooks = this.library.slice();
+      this.listAvailableBooks = tempAvailable.slice();
       this.isFilter = false;
-    }    
+    }
+    
   }
 
   ngOnDestroy(): void {
