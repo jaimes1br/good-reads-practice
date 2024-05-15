@@ -3,7 +3,7 @@
     <section class="mx-1 my-3">
         <div class="d-flex ms-1">
             <span class="material-icons-outlined icon-filter">filter_list</span>
-            <p class="ms-2 mb-0">Filtro</p>
+            <p class="ms-2 mb-0">Filtro por genero</p>
         </div>
         <hr class="my-2">
         <div class="d-flex my-2">
@@ -13,14 +13,32 @@
                 (filterSelectedEvent)="onFilterChange($event)"
             />
         </div>
+        <hr class="mt-4">
+        <div class="d-flex ms-1">
+            <span class="material-icons-outlined icon-filter">filter_list</span>
+            <p class="ms-2 mb-0">Filtro por páginas</p>
+        </div>
+        <hr class="mt-4">
+        <div class="d-flex flex-column range-opc justify-content-center">
+            <input class="form-range size m-0" type="range" 
+                min="0" [max]="maxPages" [step]="maxPages/10" 
+                [(ngModel)]="numberOfPages" (change)="onFilterChange(filterName)"
+            >
+        </div>
+        <div>
+            <p class="mt-3 p-0" >Num. páginas: {{ numberOfPages }}</p>
+        </div>
     </section>
     <hr class="divider-sections">
     <section class="mx-1 my-3 py-2 books-section" >
         <div>
-            <h4 class="mb-0 d-inline">{{totalAvailable}} libros disponibles</h4>
-            <h5 *ngIf="isFilter" class="mb-0 ms-3 d-inline text-filter">
-                ({{totalBooksGenre}} libros disponibles de {{filterName}})
-            </h5>
+            <div class="d-flex">
+                <h4 class="mb-0 d-inline">{{totalAvailable}} libros disponibles</h4>
+                <h5 *ngIf="isFilter" class="mb-0 ms-3 d-inline text-filter">
+                    ({{totalBooksGenre}} libros disponibles de {{filterName}})
+                </h5>
+                <p class="mb-0 ms-auto d-inline text-filter">Con max. {{ numberOfPages }} páginas</p>
+            </div>
             <p class="ms-3">{{totalMyList}} en la lista de lectura</p>
         </div>
         <div class="px-2 mb-3 row scroll">
@@ -38,7 +56,7 @@
                     <h4 class="mt-2 text-filter">
                         No hay libros dispobibles de {{filterName}}
                     </h4>
-        </div>
+            </div>
         </div>
     </section>
 </main>

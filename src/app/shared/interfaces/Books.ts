@@ -25,6 +25,7 @@ export interface Author {
 export interface BooksNumbers {
     available: number;
     myList: number;
+    maxPages: number;
 }
 
 export interface BookPreview {

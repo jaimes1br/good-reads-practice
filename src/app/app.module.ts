@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -31,6 +32,7 @@ import { HomePagesComponent } from './pages/home-pages/home-pages.component';
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
     AppRoutingModule,
     DragDropModule,
   ],
