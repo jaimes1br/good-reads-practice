@@ -26,3 +26,9 @@ export interface BooksNumbers {
     available: number;
     myList: number;
 }
+
+export interface BookPreview {
+    title:  string;
+    author: string;
+    cover:  string;
+}
