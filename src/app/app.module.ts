@@ -14,6 +14,7 @@ import { BookComponent } from './components/book/book.component';
 import { MyListPageComponent } from './pages/my-list-page/my-list-page.component';
 import { DragDropBooksComponent } from './components/drag-drop-books/drag-drop-books.component';
 import { BookCardComponent } from './components/drag-drop-books/book-card/book-card.component';
+import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BookCardComponent } from './components/drag-drop-books/book-card/book-c
     MyListPageComponent,
     DragDropBooksComponent,
     BookCardComponent,
+    HomePagesComponent
   ],
   imports: [
     BrowserModule,

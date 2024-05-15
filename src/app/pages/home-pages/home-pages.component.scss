@@ -1,0 +1,65 @@
+@import '../../../vars.scss';
+
+.main-container{
+    height: calc(100vh - 100px);
+
+    section { flex: 1; }
+
+    .extra{ flex: 2; }
+    
+    .content{
+        &-txt{
+            display: flex;
+            align-items: center;
+            flex: 1;
+
+            .text{
+                display: inline;
+                font-family: 'PT Sans Narrow', sans-serif !important;
+                font-size: 10rem;
+            }
+
+            &-reads {
+                color: $orange-color;
+                left: -15%;
+                position: relative;
+                top: 12%;
+            }
+        }
+        
+        &-figs{
+            .book{
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                height: 90%;
+                justify-content: space-between;
+                overflow: hidden;
+                width: 80%;
+
+                img{
+                    height: 80%;
+                    object-fit: cover;
+                    width: 90%;
+                }
+
+                &-b{
+                    border-top-left-radius: 100px;
+                    border-top-right-radius: 100px;
+                }
+                
+                &-t{
+                    border-bottom-left-radius: 100px;
+                    border-bottom-right-radius: 100px;
+                }
+            }
+
+            .c-r{
+                flex-direction: column-reverse;
+                
+                p{ align-content: end; }
+            }
+        }
+    }
+}
+

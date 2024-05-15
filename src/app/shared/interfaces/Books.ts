@@ -27,3 +27,9 @@ export interface BooksNumbers {
     myList: number;
     maxPages: number;
 }
+
+export interface BookPreview {
+    title:  string;
+    author: string;
+    cover:  string;
+}

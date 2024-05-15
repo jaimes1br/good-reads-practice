@@ -8,11 +8,9 @@
     }
 }
 
-
 .flex_grow{
     flex-grow: 1;
 }
-
 
 .flex-basis-0{
     flex-basis: 0;
@@ -54,7 +52,7 @@
             -moz-border-radius: 4px;
             -ms-border-radius: 4px;
             -o-border-radius: 4px;
-}
+        }
         
         a:not(.active):hover::after {
             transform-origin: left;
@@ -110,4 +108,8 @@
         -ms-transform: translateY(-50%);
         -o-transform: translateY(-50%);
     }
+}
+
+.cursor {
+    cursor: pointer;
 }
