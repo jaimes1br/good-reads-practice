@@ -33,7 +33,8 @@
     </ul>
     
     <div class="d-flex flex-grow-1 justify-content-end align-items-center me-3 flex-basis-0">
-        <div class="input-wrapper" *ngIf="!isHome">
+        <goodReads-search *ngIf="!isHome"/>
+        <!-- <div class="input-wrapper" *ngIf="!isHome">
             <input type="text" class="input-element" placeholder="Buscar libro..." />
           
             <svg
@@ -48,6 +49,6 @@
                   clip-rule="evenodd"
                />
             </svg>
-         </div>
+        </div> -->
     </div>
 </nav>

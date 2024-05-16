@@ -75,7 +75,7 @@ export const BOOKS = {
   },
     {
       "book": {
-          "title": "Apocalipsis Zombie",
+          "title": "Apocalipsis ZombieDune",
           "pages": 444,
           "genre": "Zombies",
           "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1422626176i/24762432.jpg",
@@ -116,7 +116,7 @@ export const BOOKS = {
         "year": 1979,
         "ISBN": "978-0345391803",
         "author": {
-            "name": "Douglas Adams",
+            "name": "Douglas Adams dune",
             "otherBooks": [
                 "El restaurante del fin del mundo",
                 "La vida, el universo y todo lo demás"

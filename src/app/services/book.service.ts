@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, tap, BehaviorSubject ,map, Observable } from 'rxjs';
 import { BOOKS } from '../shared/mocks/books';
-import { BooksNumbers, Library, LibraryElement } from '../shared/interfaces/Books';
+import { BooksNumbers, Library, LibraryElement, SearchBooks } from '../shared/interfaces/Books';
 import { DataGenre } from '../shared/interfaces/DataGenre';
 import { MyListBooks } from '../shared/interfaces/StorageBooks';
  
@@ -33,6 +33,9 @@ export class BookService {
   bookNumbersSubject = new BehaviorSubject<BooksNumbers>({available: 0,myList: 0, maxPages: 0});
   bookNumbers$: Observable<BooksNumbers> = this.bookNumbersSubject.asObservable();
 
+  availableBooksSearchedSubject = new BehaviorSubject<SearchBooks>({selected: [],rest: []});
+  availableBooksSearched$: Observable<SearchBooks> = this.availableBooksSearchedSubject.asObservable();
+ 
   constructor() { }
   
   getAllBooks(): Observable<LibraryElement[]>{
@@ -61,9 +64,11 @@ export class BookService {
   
   getMyListISBN(){  
     const localListISBN = localStorage.getItem('myListISBN');
+    console.log(localListISBN);
     
     if(!!localListISBN){
       this.myListISBN = JSON.parse(localListISBN);
+      this.getMyBookListLocal();
       this.updateAvailableList(); 
     }else{
       this.availableBooksSubject.next(this.librarySubject.getValue());
@@ -150,6 +155,53 @@ export class BookService {
     }
 
     this.myBooksListSubject.next(this.myBookList);
+  }
+
+  getSearchBooks(term:string) {
+    const mylibraryObj = this.myBooksListSubject.getValue();
+    let myLibrary: LibraryElement[] = [];
+    if(mylibraryObj){
+      myLibrary = [
+        ...mylibraryObj?.pending,
+        ...mylibraryObj?.read,
+        ...mylibraryObj?.reading,
+      ]
+    }
+
+    const restBooks = this.availableBooksSubject.getValue()!['library'];
+
+    // console.log('Guardados');
+    // console.log(myLibrary);
+    // console.log('Todos:');
+    // console.log(restBooks);
+    
+
+    const search: {
+      selected:LibraryElement[],
+      rest: LibraryElement[]
+    } = {
+      selected : [],
+      rest: []
+    } 
+
+    search.selected = myLibrary.filter(({book}:LibraryElement) => {
+          const author = book.author.name.toLowerCase();
+          const title = book.title.toLowerCase();
+  
+          return (author.includes(term) || title.includes(term))
+    });
+
+    search.rest = restBooks.filter(({book}:LibraryElement) => {
+      const author = book.author.name.toLowerCase();
+      const title = book.title.toLowerCase();
+
+      return (author.includes(term) || title.includes(term))
+    });
+
+    console.log(search);
+    
+    this.availableBooksSearchedSubject.next(search);
+
   }
 
 }

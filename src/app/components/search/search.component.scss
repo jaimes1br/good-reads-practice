@@ -1,0 +1,36 @@
+@import '../../../vars.scss';
+
+.input {
+
+    &-wrapper{
+        position: relative;
+        
+        input[type=text] {
+            box-sizing: border-box;
+            color: $black-color;
+            padding: 6px 10px;
+            border: none;
+            border-bottom: 2px solid $orange-color;
+            padding-left: 40px;
+            background-color: transparent !important;
+        
+            &:focus, &:active{
+                outline: none;
+            }
+        }
+    }
+
+    &-icon{
+        color: $black-color;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+    }
+}

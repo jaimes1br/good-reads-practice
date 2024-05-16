@@ -33,3 +33,8 @@ export interface BookPreview {
     author: string;
     cover:  string;
 }
+
+export interface SearchBooks {
+    selected: LibraryElement[];
+    rest: LibraryElement[]
+}
