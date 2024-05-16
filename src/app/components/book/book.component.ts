@@ -12,6 +12,7 @@ export class BookComponent implements OnInit {
    
   isRemoved: boolean = false;
   
+  @Input() isOnSearch: boolean = false;
   @Input() isSelected: boolean = false;
   @Input() book: Book = {    
       title:    '',

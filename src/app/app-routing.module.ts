@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePagesComponent } from './pages/home-pages/home-pages.component';
 import { BooksPagesComponent } from './pages/books-pages/books-pages.component';
 import { MyListPageComponent } from './pages/my-list-page/my-list-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 const routes: Routes = [
     { path: 'home', component: HomePagesComponent },
     { path: 'books', component: BooksPagesComponent },
+    { path: 'books/:nameBook', component: SearchPageComponent },
     { path: 'my-list', component: MyListPageComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ]; 
