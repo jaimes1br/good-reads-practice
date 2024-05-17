@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,8 @@ export class SearchBookPageComponent implements OnInit, OnDestroy{
   totalBooks:number = 0
   listSub: Subscription[] = [];
 
-  constructor(private route: ActivatedRoute, private bookService: BookService){}
+  private route =  inject(ActivatedRoute);
+  private bookService = inject(BookService);
   
   ngOnInit(): void {
     const bookSub = this.bookService.availableBooksSearched$.subscribe(({rest,selected}) => {

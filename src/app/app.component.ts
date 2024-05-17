@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BookService } from '@shared/services/book.service';
 import { NavbarComponent } from '@shared/components/navbar/navbar.component';
@@ -12,9 +12,8 @@ import { NavbarComponent } from '@shared/components/navbar/navbar.component';
 })
 export class AppComponent implements OnInit {
 
+  private bookService = inject(BookService);
   
-  constructor(private bookService: BookService){}
- 
   ngOnInit(): void {
     this.bookService.getAllBooks().subscribe();
   }

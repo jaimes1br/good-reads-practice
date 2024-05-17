@@ -32,8 +32,6 @@ export class BookService {
 
   availableBooksSearchedSubject = new BehaviorSubject<SearchBooks>({selected: [],rest: []});
   availableBooksSearched$: Observable<SearchBooks> = this.availableBooksSearchedSubject.asObservable();
- 
-  constructor() { }
   
   getAllBooks(): Observable<LibraryElement[]>{
     return of(BOOKS)

@@ -13,8 +13,6 @@ export class GenreItemComponent {
   @Input() dataGenre: DataGenre = { name: '', isSelected: false, index: 0}
   @Output() selectetEmitter = new EventEmitter<number>();
 
-  constructor(){}
-
   onSelected(): void{
     this.dataGenre.isSelected = !this.dataGenre.isSelected;
     this.selectetEmitter.emit(this.dataGenre.index);

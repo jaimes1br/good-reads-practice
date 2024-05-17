@@ -17,11 +17,7 @@ export class DragDropBooksComponent {
   @Input() reading: LibraryElement[] = [];
   @Input() read: LibraryElement[] = [];
   
-  ngOnInit(): void {
-
-  }
-  
-  drop(event: CdkDragDrop<LibraryElement[]>) {
+  drop(event: CdkDragDrop<LibraryElement[]>): void{
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -36,7 +32,7 @@ export class DragDropBooksComponent {
     this.updateLocal();
   }
   
-  updateLocal(){
+  updateLocal(): void{
     const books = {
       pending: this.pending,
       reading: this.reading,

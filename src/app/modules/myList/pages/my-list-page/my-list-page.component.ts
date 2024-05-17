@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -36,7 +36,7 @@ export class MyListPageComponent implements OnInit,OnDestroy{
     read: []
   }
 
-  constructor(private bookService: BookService){}
+  private bookService = inject(BookService);
 
   ngOnInit(): void {
     const numberSub = this.bookService.bookNumbers$.subscribe(({ myList }:BooksNumbers)=>{

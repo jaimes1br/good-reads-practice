@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { DataGenre } from '@core/models/DataGenre.model';
 import { Library } from '@core/models/Books.model';
@@ -10,9 +10,9 @@ import { BookService } from './book.service';
 export class GenresService {
 
   private genresList: DataGenre[] = [];
+  private bookService = inject(BookService);
 
-  constructor(private bookService:BookService) {
-
+  constructor() {
     this.bookService.librarySubject.subscribe(books => {
       if(!!books)
         this.makeList(books)
@@ -31,7 +31,6 @@ export class GenresService {
 
     this.genresList[0].isSelected = true; 
   }
-
 
   get getGenresList(): DataGenre[] {
     return this.genresList;

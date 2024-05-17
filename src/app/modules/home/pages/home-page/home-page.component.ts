@@ -13,7 +13,6 @@ import { RouterLink } from '@angular/router';
 })
 export class HomePageComponent {
 
-
   titleGood:string = 'Good';
   titleReads:string = 'Reads';
 

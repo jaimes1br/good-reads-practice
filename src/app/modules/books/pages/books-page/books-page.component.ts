@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -35,8 +35,9 @@ export class BooksPageComponent implements OnInit, OnDestroy{
   maxPages: number = 0
   numberOfPages: number = 0;
 
-  constructor(public bookService: BookService, private genresService:GenresService){}
- 
+  public bookService = inject(BookService); 
+  private genresService = inject(GenresService);
+  
   ngOnInit(): void {
     const librarySub = this.bookService.availableBooks$.subscribe(library => {            
       if(library){

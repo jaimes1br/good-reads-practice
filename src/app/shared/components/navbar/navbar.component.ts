@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BookService } from '@shared/services/book.service';
@@ -11,6 +11,6 @@ import { SearchComponent } from '../search/search.component';
     imports: [RouterLink, RouterLinkActive, NgIf, SearchComponent, AsyncPipe]
 })
 export class NavbarComponent {
-
-  constructor(public bookService: BookService){}
+  
+  public bookService = inject(BookService);
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchComponent {
   src: string = ''
-  
-  constructor(private router: Router) { }
+ 
+  private router = inject(Router);
 
   onSearch(): void {
     if(this.src.trim() === '') return
