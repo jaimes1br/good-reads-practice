@@ -1,27 +1,63 @@
 # GoodReads
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+Este proyecto se creo con [Angular CLI](https://github.com/angular/angular-cli) en su versión 16.1.6.
 
-## Development server
+La idea original de este proyecto sale de las pruebas técnicas propuestas por  [@MiduDev](https://github.com/midudev "@MiduDev") en https://pruebastecnicas.com/ .
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Objetivo
 
-## Code scaffolding
+Diseñar e implementar una pequeña aplicación web de lista de libros utilizado herramientas de mi elección, en este caso usando el framework de Angular.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Contexto
+
+Se tiene un sello editorial de libros multinacional. Buscando ofrecer a su público una forma de ver su catálogo y poder guardar los libros que les interesan en una lista de lectura.
+
+Para ello, quieren desarrollar una aplicación web que permita a los usuarios ver los libros disponibles y crear una lista de lectura.
+
+## Requisitos
+
+### Funcionalidad
+
+1. [x]**Visualización de Libros Disponibles**: La aplicación debe mostrar una lista de libros disponibles que el usuario pueda revisar.
+2. [x]**Creación de Lista de Lectura**: El usuario debe ser capaz de crear una lista de lectura a partir de los libros disponibles. En la UI debe quedar claro qué libros están en la lista de lectura y cuáles no. También debe ser posible mover un libro de la lista de lectura a la lista de disponibles.
+3. [x]**Filtrado de Libros por Género**: Los usuarios deben poder filtrar la lista de libros disponibles por género, y se mostrará un contador con el número de libros disponibles, el número de libros en la lista de lectura y el número de libros disponibles en el género seleccionado.
+4. [x]**Sincronización de Estado**: Debe haber una sincronización del estado global que refleje el número de libros en la lista de lectura y el número de libros todavía disponibles. Si un libro se mueve de la lista de disponibles a la lista de lectura, el recuento de ambos debe actualizarse en consecuencia.
+5. [x]**Persistencia de Datos**: La aplicación debe persistir los datos de la lista de lectura en el almacenamiento local del navegador. Al recargar la página, la lista de lectura debe mantenerse.
+6. [ ]**Sincronización entre pestañas**: Si el usuario abre la aplicación en dos pestañas diferentes, los cambios realizados en una pestaña deben reflejarse en la otra. Sin necesidad de usar Backend.
+7. [ ]**Despliegue**: La aplicación debe estar desplegada en algún servicio de hosting gratuito (Netlify, Vercel, Firebase, etc) y debe ser accesible a través de una URL pública. Indica la URL en el README.
+8. [ ]**Test**: La aplicación debe tener AL MENOS un test. Haz el test que consideres más importante para tu aplicación.
+
+### Desafios adicionales
+
+1. [x] Implementar una funcionalidad de búsqueda en la lista de libros disponibles.
+2. [x]Añade un nuevo filtro para filtrar los libros por número de páginas.
+3. [x]Permitir la reorganización de los libros en la lista de lectura por prioridad.
+4. [ ]Haz que tu diseño sea responsive.
+
+## Ver Aplicación
+
+Es posible ver la aplicación en ejecució de manera local, descarga el repositorio:
+
+```bash
+git clone https://github.com/jaimes1br/good-reads-practice.git
+```
+
+Una vez descargado, instala las dependencias: 
+
+```bash
+cd good-reads/
+npm install
+```
+
+Para iniciar la aplicación ejecuta
+
+```bash
+ng serve
+```
+
+Una vez terminado el proceso, en un navegador navega a `http://localhost:4200/`.
+
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para obtener el build del proyecto, ejecuta el comando `ng build`. Podremos ver el resultado en el directorio `dist/`.
