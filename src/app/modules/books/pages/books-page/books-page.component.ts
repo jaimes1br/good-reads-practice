@@ -3,6 +3,7 @@ import { Book, LibraryElement } from '@core/models/Books.model';
 import { DataGenre } from '@core/models/DataGenre.model';
 import { BookService } from '@shared/services/book.service';
 import { Subscription } from 'rxjs';
+import { GenresService } from '../../../../shared/services/genres.service';
 
 @Component({
   selector: 'goodReads-books-page',
@@ -22,22 +23,19 @@ export class BooksPageComponent implements OnInit, OnDestroy{
   totalBooksGenre: number = 0;
   filterName: string = 'Todos';
 
-  genresSub!: Subscription;
   librarySub!: Subscription;
   booksNumbersSub!: Subscription;
 
   maxPages: number = 0
   numberOfPages: number = 0;
 
-  constructor(public bookService: BookService){}
+  constructor(public bookService: BookService, private genresService:GenresService){}
  
   ngOnInit(): void {
-    this.genresSub = this.bookService.genresList$.subscribe(genres => {
-        this.listGenres = genres.slice(); 
-    });
-
     this.librarySub = this.bookService.availableBooks$.subscribe(library => {            
       if(library){
+        this.listGenres = this.genresService.getGenresList;
+        
         this.library = library['library'];
         (this.isFilter)
           ? this.onFilterChange(this.filterName)
@@ -82,8 +80,9 @@ export class BooksPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if(this.genresSub) this.genresSub.unsubscribe();
     if(this.librarySub) this.librarySub.unsubscribe();
     if(this.booksNumbersSub) this.booksNumbersSub.unsubscribe();
+
+    this.genresService.resetGenresList();
   }
 }

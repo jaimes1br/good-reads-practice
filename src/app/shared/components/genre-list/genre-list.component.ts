@@ -14,6 +14,8 @@ export class GenreListComponent {
 
   ngOnInit(): void {
     this.selectedItem = this.listGenres.filter(genre => genre.isSelected)[0];
+    // console.log('Se crea con -> ', this.selectedItem);
+    
   }
 
   onChangeSelected(indexSelected: number){

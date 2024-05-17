@@ -4,6 +4,7 @@ import { DataGenre } from '@core/models/DataGenre.model';
 import { MyListBooks } from '@core/models/StorageBooks.model';
 import { of, tap, BehaviorSubject ,map, Observable } from 'rxjs';
 import { BOOKS } from '../../data/books';
+import { GenresService } from './genres.service';
 
  
 @Injectable({
@@ -28,9 +29,6 @@ export class BookService {
   myBooksListSubject = new BehaviorSubject<MyListBooks | null>(null);
   myBooksList$: Observable<MyListBooks | null> = this.myBooksListSubject.asObservable();
 
-  genresListSubject:BehaviorSubject<DataGenre[]> = new BehaviorSubject<DataGenre[]>([]);
-  genresList$: Observable<DataGenre[]> = this.genresListSubject.asObservable();
-  
   bookNumbersSubject = new BehaviorSubject<BooksNumbers>({available: 0,myList: 0, maxPages: 0});
   bookNumbers$: Observable<BooksNumbers> = this.bookNumbersSubject.asObservable();
 
@@ -44,19 +42,6 @@ export class BookService {
       .pipe(
         tap(library => this.librarySubject.next(library)),
         map(library => library['library']),
-        tap(books => {
-          const tempGenres = books.map(book => book.book.genre);
-          let genres = [...new Set(tempGenres)];
-          genres.unshift('Todos');
-          const genderList = genres.map((genre,index) => {
-            return {
-              name: genre, isSelected: false, index 
-            }
-          });
-
-          genderList[0].isSelected = true; 
-          this.genresListSubject.next(genderList);
-        }),
         tap(() => this.getMyListISBN()),
         tap(() => this.updateAvailableList()),
         tap(() => this.setBooksNumbers())
@@ -65,7 +50,6 @@ export class BookService {
   
   getMyListISBN(){  
     const localListISBN = localStorage.getItem('myListISBN');
-    console.log(localListISBN);
     
     if(!!localListISBN){
       this.myListISBN = JSON.parse(localListISBN);
@@ -169,13 +153,7 @@ export class BookService {
       ]
     }
 
-    const restBooks = this.availableBooksSubject.getValue()!['library'];
-
-    // console.log('Guardados');
-    // console.log(myLibrary);
-    // console.log('Todos:');
-    // console.log(restBooks);
-    
+    const restBooks = this.availableBooksSubject.getValue()!['library'];   
 
     const search: {
       selected:LibraryElement[],
@@ -199,8 +177,6 @@ export class BookService {
       return (author.includes(term) || title.includes(term))
     });
 
-    console.log(search);
-    
     this.availableBooksSearchedSubject.next(search);
 
   }
