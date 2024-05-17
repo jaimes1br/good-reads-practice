@@ -1,13 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { LibraryElement } from '@core/models/Books.model';
 import { BookService } from '@shared/services/book.service';
+import { BookComponent } from '@shared/components/book/book.component';
 @Component({
-  selector: 'goodReads-search-book-page',
-  templateUrl: './search-book-page.component.html',
-  styleUrls: ['./search-book-page.component.scss']
+    selector: 'goodReads-search-book-page',
+    templateUrl: './search-book-page.component.html',
+    styleUrls: ['./search-book-page.component.scss'],
+    standalone: true,
+    imports: [RouterLink, NgFor, BookComponent, NgIf, TitleCasePipe]
 })
 export class SearchBookPageComponent implements OnInit, OnDestroy{
 

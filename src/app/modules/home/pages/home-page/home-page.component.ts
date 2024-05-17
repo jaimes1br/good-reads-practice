@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { BookPreview } from '@core/models/Books.model';
+import { NgFor, NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
-  selector: 'goodReads-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+    selector: 'goodReads-home-page',
+    templateUrl: './home-page.component.html',
+    styleUrls: ['./home-page.component.scss'],
+    standalone: true,
+    imports: [RouterLink, NgFor, NgClass]
 })
 export class HomePageComponent {
 

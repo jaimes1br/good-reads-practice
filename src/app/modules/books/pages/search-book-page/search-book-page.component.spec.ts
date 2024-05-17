@@ -8,8 +8,8 @@ describe('SearchBookPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchBookPageComponent]
-    });
+    imports: [SearchBookPageComponent]
+});
     fixture = TestBed.createComponent(SearchBookPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

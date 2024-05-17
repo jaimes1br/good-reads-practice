@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { BooksPageComponent } from './pages/books-page/books-page.component';
 import { SearchBookPageComponent } from './pages/search-book-page/search-book-page.component';
 
-const routes: Routes = [
+export const booksRoutes: Routes = [
   {
     path: '',
     component: BooksPageComponent,
@@ -13,9 +12,3 @@ const routes: Routes = [
     component: SearchBookPageComponent
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class BooksRoutingModule { }

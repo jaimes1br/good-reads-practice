@@ -1,15 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Book, LibraryElement } from '@core/models/Books.model';
 import { DataGenre } from '@core/models/DataGenre.model';
 import { BookService } from '@shared/services/book.service';
 import { GenresService } from '@shared/services/genres.service';
+import { GenreListComponent } from '@shared/components/genre-list/genre-list.component';
+import { BookComponent } from '@shared/components/book/book.component';
 
 @Component({
-  selector: 'goodReads-books-page',
-  templateUrl: './books-page.component.html',
-  styleUrls: ['./books-page.component.scss']
+    selector: 'goodReads-books-page',
+    templateUrl: './books-page.component.html',
+    styleUrls: ['./books-page.component.scss'],
+    standalone: true,
+    imports: [GenreListComponent, FormsModule, NgIf, NgFor, BookComponent]
 })
 export class BooksPageComponent implements OnInit, OnDestroy{
   

@@ -8,8 +8,8 @@ describe('DragDropBooksComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DragDropBooksComponent]
-    });
+    imports: [DragDropBooksComponent]
+});
     fixture = TestBed.createComponent(DragDropBooksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

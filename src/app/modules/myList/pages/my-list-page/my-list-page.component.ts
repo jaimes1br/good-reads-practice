@@ -1,15 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgIf, NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Book, BooksNumbers, LibraryElement } from '@core/models/Books.model';
 import { DataGenre } from '@core/models/DataGenre.model';
 import { MyListBooks } from '@core/models/StorageBooks.model';
 import { BookService } from '@shared/services/book.service';
+import { GenreListComponent } from '@shared/components/genre-list/genre-list.component';
+import { DragDropBooksComponent } from '@shared/components/drag-drop-books/drag-drop-books.component';
+import { BookComponent } from '@shared/components/book/book.component';
 
 @Component({
-  selector: 'goodReads-my-list-page',
-  templateUrl: './my-list-page.component.html',
-  styleUrls: ['./my-list-page.component.scss']
+    selector: 'goodReads-my-list-page',
+    templateUrl: './my-list-page.component.html',
+    styleUrls: ['./my-list-page.component.scss'],
+    standalone: true,
+    imports: [GenreListComponent, RouterLink, NgIf, DragDropBooksComponent, NgFor, BookComponent]
 })
 export class MyListPageComponent implements OnInit,OnDestroy{
 

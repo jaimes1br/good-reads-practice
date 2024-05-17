@@ -8,8 +8,8 @@ describe('GenreItemComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GenreItemComponent]
-    });
+    imports: [GenreItemComponent]
+});
     fixture = TestBed.createComponent(GenreItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

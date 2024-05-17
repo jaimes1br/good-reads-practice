@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataGenre } from '@core/models/DataGenre.model';
+import { NgFor } from '@angular/common';
+import { GenreItemComponent } from '../genre-item/genre-item.component';
 
 @Component({
-  selector: 'goodReads-genre-list',
-  templateUrl: './genre-list.component.html',
-  styleUrls: ['./genre-list.component.scss']
+    selector: 'goodReads-genre-list',
+    templateUrl: './genre-list.component.html',
+    styleUrls: ['./genre-list.component.scss'],
+    standalone: true,
+    imports: [NgFor, GenreItemComponent]
 })
 export class GenreListComponent implements OnInit{
   
