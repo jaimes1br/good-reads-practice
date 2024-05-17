@@ -1,0 +1,28 @@
+@import './../../../../vars.scss';
+
+.book{
+
+    &-img{
+        width: 193px;
+        height: 280px;
+        object-fit: cover;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    &-autor{
+        &-container{
+            font-size: 12px;
+        }
+
+        &-bookmark{
+            cursor: pointer;
+            color: $orange-color;
+        }
+    }
+
+    &-genre{
+        font-size: 12px;
+        color: $orange-color;
+    }
+    
+}

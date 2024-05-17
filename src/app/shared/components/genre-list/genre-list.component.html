@@ -1,0 +1,7 @@
+<div class="genre-container my-2" >
+    <goodReads-genre-item 
+        *ngFor="let genre of listGenres" 
+        [dataGenre]="genre"
+        (selectetEmitter)="onChangeSelected($event)"
+    />    
+</div>
