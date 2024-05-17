@@ -1,0 +1,35 @@
+<hr class="divider-main"/>
+<main class="container-fluid d-flex main-container">
+   <section class="d-flex flex-column content">
+        <div class="content-txt">
+            <h2 class="text fade-in-left">
+                {{ titleGood }}
+            </h2>
+            <div class="d-flex flex-column content-txt-reads ">
+                <h2 class="text fade-in-bottom">
+                    <strong>{{ titleReads }}</strong>
+                </h2>
+                <a class="align-self-end btn btn-dark btn-orange fade-in-bottom anim-del-1" routerLink="/books">
+                    ¡Descubre más!
+                </a>
+            </div>
+        </div>    
+    </section>
+    <section class="d-flex justify-content-around content extra">
+        <div class="d-flex align-items-center content-figs">
+             <div *ngFor="let book of booksPreview; let im = odd"
+                  class="book mx-2 anim-del-2"
+                  [ngClass]="{
+                        'c-r': im,
+                        'book-t': im, 
+                        'book-b': !im,
+                        'fade-in-bottom': im,
+                        'fade-in-top': !im
+                    }">
+                  <img [src]="book.cover" [alt]="book.title">
+                  <p class="mt-2 mb-0 text-truncate"><strong>{{ book.title}}</strong></p>
+                  <p class="mb-0 flex-grow-1 text-truncate">{{ book.author }}</p>
+            </div>
+        </div>
+   </section>
+</main>

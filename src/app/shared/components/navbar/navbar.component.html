@@ -1,0 +1,40 @@
+<nav class="container-fluid d-flex align-items-center px-4 justify-content-between">
+    <div class="d-flex flex-grow-1 align-items-center my-3 flex-basis-0">
+        <h2 routerLink="/home" 
+            class="m-0 title cursor">
+                Good<strong>Reads</strong>
+        </h2>
+    </div>
+    <ul class="d-flex align-items-center nav-list p-0 m-0 mx-2">
+        <li class="mx-2" >
+            <a class="px-3 py-2" 
+                routerLink="/home" 
+                routerLinkActive="active">
+                    Inicio
+            </a>
+        </li>
+        <li class="mx-2">
+            <a class="px-3 py-2" 
+                routerLink="/books" 
+                routerLinkActive="active">
+                    Libros
+            </a>
+        </li>
+        <li class="mx-2">
+            <a class="px-3 py-2" routerLink="/my-list" routerLinkActive="active">
+                Mi Lista
+                <span 
+                    *ngIf="(bookService.bookNumbersSubject | async)?.myList"    
+                    class="position-absolute top-10 start-75 
+                           translate-middle p-2 border border-light 
+                           rounded-circle bg-orange">
+                     <span class="visually-hidden">New alerts</span>
+                </span>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="d-flex flex-grow-1 justify-content-end align-items-center me-3 flex-basis-0">
+        <goodReads-search/>
+    </div>
+</nav>

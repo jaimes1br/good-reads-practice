@@ -1,0 +1,4 @@
+<div class="d-flex genre-opc" [ngClass]="{'selected': dataGenre.isSelected}" (click)="onSelected()">
+    <span class="material-icons-outlined icon-genre">{{dataGenre.isSelected ? 'rocket_launch': 'rocket'}}</span>
+    <p class="ps-2 mb-0">{{dataGenre.name}}</p>
+</div>

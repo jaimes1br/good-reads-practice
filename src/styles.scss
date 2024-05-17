@@ -1,1 +1,160 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=PT+Sans+Narrow:wght@400;700&display=swap');
+@import 'vars.scss';
+
+html,
+body{
+    height: 100%;
+}
+
+html,body {
+    background-color: #EEEEEE;
+    font-family: 'Montserrat', sans-serif ;  
+    color: $black-color;
+    overflow: hidden;
+}
+
+.btn-orange{
+    background-color: $orange-color;
+    border-color: $orange-color;
+
+    &:hover{
+        opacity: 0.8;
+    }
+
+    &:focus,&:active{
+        outline: none;
+    }
+}
+.pointer {
+    cursor: pointer;
+}
+
+.fade-in-left {
+	-webkit-animation: fade-in-left 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	animation: fade-in-left 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation-delay: 0.5s;
+}
+
+.fade-in-bottom {
+	-webkit-animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation-delay: 0.5s;
+}
+
+.fade-in-top {
+	-webkit-animation: fade-in-top 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in-top 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation-delay: 0.5s;
+}
+
+.anim-del-1{ animation-delay: 0.8s; }
+
+.anim-del-2{ animation-delay: 1s;}
+
+.gradient-bg-animation{
+    background: rgb(189, 189, 189);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(209, 172, 137) 0%, rgb(253, 208, 171) 48%, rgb(250, 222, 222) 100%);
+    background-size: 300% 100%;
+    animation: gradient 2s ease infinite;
+    -webkit-animation: gradient 2s ease infinite;
+}
+
+ @-webkit-keyframes fade-in-top {
+    0% {
+        opacity:   0;
+        transform:      translateY(-50px);
+        -webkit-transform:  translateY(-50px);
+        -moz-transform:  translateY(-50px);
+        -ms-transform:  translateY(-50px);
+        -o-transform:  translateY(-50px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-top {
+    0% {
+      -webkit-transform: translateY(-50px);
+              transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+}
+  
+
+ @-webkit-keyframes fade-in-left {
+    0% {
+      -webkit-transform: translateX(-50px);
+              transform: translateX(-50px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+}
+ 
+@keyframes fade-in-left {
+    0% {
+      -webkit-transform: translateX(-50px);
+              transform: translateX(-50px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+}
+  
+@-webkit-keyframes fade-in-bottom {
+    0% {
+        -webkit-transform: translateY(50px);
+                transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-bottom {
+    0% {
+        -webkit-transform: translateY(50px);
+                transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+                transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+  

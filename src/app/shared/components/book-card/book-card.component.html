@@ -1,0 +1,20 @@
+<div class="d-flex container-book" cdkDrag>
+    <div class="container-img">
+        <img 
+            class=""
+            [src]="book.book.cover" 
+            [alt]="book.book.title"
+            (load)="imgLoaded = true"
+            [hidden]="!imgLoaded">
+        <div 
+            class="container-placeholder gradient-bg-animation"
+            *ngIf="!imgLoaded">
+        </div>
+    </div>
+
+    <div class="d-flex flex-column ms-2 py-2 px-1 book-info">
+        <p class="mb-0 fw-bold book-info-title">{{book.book.title}}</p> 
+        <p class="mb-0 fw-bold book-info-genre">{{book.book.genre}}</p>
+        <p class="mb-auto book-info-genre">{{book.book.year}}</p>
+    </div>
+</div>

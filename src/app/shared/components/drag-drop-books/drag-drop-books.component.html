@@ -1,0 +1,46 @@
+<div cdkDropListGroup class="mx-2 my-1 row scroll">
+    <div class="px-2 py-3 col container-col">
+      <div class="d-flex align-items-center py-2 mb-2 container-title">
+        <span class="material-icons-outlined">library_books</span>
+        <h6 class="ms-2 mb-0">Pendientes</h6>
+      </div>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="pending"
+        class="container-books"
+        (cdkDropListDropped)="drop($event)">
+          <goodReads-book-card  *ngFor="let book of pending" [book]="book"/>
+      </div>
+    </div>
+
+    <div class="px-2 py-3 mx-2 col container-col">
+        <div class="d-flex align-items-center py-2 mb-2 container-title">
+          <span class="material-icons-outlined">cached</span>
+          <h6 class="ms-2 mb-0">Estas leyendo</h6>
+        </div>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="reading"
+          class="container-books"
+          (cdkDropListDropped)="drop($event)">
+            <goodReads-book-card  *ngFor="let book of reading" [book]="book"/>
+        </div>
+      </div>
+
+      <div class="px-2 py-3 col container-col">
+        <div class="d-flex align-items-center py-2 mb-2 container-title">
+          <span class="material-icons-outlined">check_circle</span>
+          <h6 class="ms-2 mb-0">Leídos</h6>
+        </div>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="read"
+          class="container-books"
+          (cdkDropListDropped)="drop($event)">
+            <goodReads-book-card  *ngFor="let book of read" [book]="book"/>
+        </div>
+      </div>
+  </div>
