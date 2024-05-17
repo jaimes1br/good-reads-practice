@@ -24,8 +24,10 @@
             <a class="px-3 py-2" routerLink="/my-list" routerLinkActive="active">
                 Mi Lista
                 <span 
-                    *ngIf="isMyList"    
-                    class="position-absolute top-10 start-75 translate-middle p-2 border border-light rounded-circle bg-orange">
+                    *ngIf="(bookService.bookNumbersSubject | async)?.myList"    
+                    class="position-absolute top-10 start-75 
+                           translate-middle p-2 border border-light 
+                           rounded-circle bg-orange">
                      <span class="visually-hidden">New alerts</span>
                 </span>
             </a>
@@ -33,22 +35,6 @@
     </ul>
     
     <div class="d-flex flex-grow-1 justify-content-end align-items-center me-3 flex-basis-0">
-        <goodReads-search *ngIf="!isHome"/>
-        <!-- <div class="input-wrapper" *ngIf="!isHome">
-            <input type="text" class="input-element" placeholder="Buscar libro..." />
-          
-            <svg
-               xmlns="http://www.w3.org/2000/svg"
-               class="input-icon"
-               viewBox="0 0 20 20"
-               fill="currentColor"
-            >
-               <path
-                  fill-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clip-rule="evenodd"
-               />
-            </svg>
-        </div> -->
+        <goodReads-search/>
     </div>
 </nav>
