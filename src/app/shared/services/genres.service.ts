@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BookService } from './book.service';
+
 import { DataGenre } from '@core/models/DataGenre.model';
 import { Library } from '@core/models/Books.model';
+import { BookService } from './book.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class GenresService {
     });
   }
 
-  private makeList(books:Library) {
+  private makeList(books:Library): void {
     const tempGenres = books['library'].map(book => book.book.genre);
     let genres = [...new Set(tempGenres)];
     genres.unshift('Todos');

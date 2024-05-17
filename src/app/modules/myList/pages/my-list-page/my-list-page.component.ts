@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { Book, BooksNumbers, LibraryElement } from '@core/models/Books.model';
 import { DataGenre } from '@core/models/DataGenre.model';
 import { MyListBooks } from '@core/models/StorageBooks.model';
 import { BookService } from '@shared/services/book.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'goodReads-my-list-page',
   templateUrl: './my-list-page.component.html',
   styleUrls: ['./my-list-page.component.scss']
 })
-export class MyListPageComponent {
+export class MyListPageComponent implements OnInit,OnDestroy{
 
   optionsMyList: DataGenre[] = [
     { name: 'Tablero', isSelected: true, index: 0 },
@@ -18,13 +19,10 @@ export class MyListPageComponent {
   ];
   
   isBoard: boolean = true;
-
   numberMyBookList: number = 0;
-  numberSub!: Subscription;
-  
   myList!: LibraryElement[];
 
-  myListSub!: Subscription;
+  listSubs: Subscription[] = [];
   allList: MyListBooks = {
     pending: [],
     reading: [],
@@ -34,26 +32,28 @@ export class MyListPageComponent {
   constructor(private bookService: BookService){}
 
   ngOnInit(): void {
-    this.numberSub = this.bookService.bookNumbers$.subscribe(({ myList }:BooksNumbers)=>{
+    const numberSub = this.bookService.bookNumbers$.subscribe(({ myList }:BooksNumbers)=>{
       this.numberMyBookList = myList;    
     });
 
     this.bookService.getMyBookListLocal();
 
-    this.myListSub = this.bookService.myBooksList$.subscribe(library => {      
+    const booksSub = this.bookService.myBooksList$.subscribe(library => {      
       if(library){
         this.allList = {...library};         
         this.updateDisplayMyList();
       }
     });
+
+    this.listSubs = [numberSub,booksSub];
   }
 
-  onFilterChange(){
+  onFilterChange(): void{
     this.isBoard = !this.isBoard;      
     this.updateDisplayMyList();
   }
   
-  updateDisplayMyList(){
+  updateDisplayMyList(): void{
     if(!this.isBoard){
       this.myList = [
           ...this.allList.pending,
@@ -63,11 +63,11 @@ export class MyListPageComponent {
     }
   }
 
-  trackByFn(index:number, item: LibraryElement){
+  trackByFn(index:number, item: LibraryElement): string{
     return item.book.ISBN
   }
 
-  removeBook({book, selected}: {book: Book, selected: boolean}){
+  removeBook({book, selected}: {book: Book, selected: boolean}): void{
     setTimeout(() => {
       (selected)
         ? this.bookService.addBookOnMyList(book.ISBN)
@@ -76,8 +76,6 @@ export class MyListPageComponent {
   }
 
   ngOnDestroy(): void {
-    if(this.myListSub) this.myListSub.unsubscribe();
-    if(this.numberSub) this.numberSub.unsubscribe();
+    this.listSubs.forEach(o => o.unsubscribe());
   }
-
 }

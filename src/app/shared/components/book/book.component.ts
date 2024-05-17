@@ -28,7 +28,7 @@ export class BookComponent {
   
   @Output() remove = new EventEmitter();
   
-  onSelectedBook(){
+  onSelectedBook(): void{
     this.isSelected = !this.isSelected;
     this.isRemoved = true;
 

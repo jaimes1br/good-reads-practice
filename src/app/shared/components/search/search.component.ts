@@ -11,12 +11,8 @@ export class SearchComponent {
   
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
   onSearch(): void {
     if(this.src.trim() === '') return
-    console.log('💨 Buscamos---> ', this.src);
     this.router.navigate(['/books',this.src.toLowerCase()]);
   }
 }

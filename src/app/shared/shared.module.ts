@@ -4,40 +4,39 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { GenreListComponent } from './components/genre-list/genre-list.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
 import { BookComponent } from './components/book/book.component';
 import { DragDropBooksComponent } from './components/drag-drop-books/drag-drop-books.component';
-import { BookCardComponent } from './components/book-card/book-card.component';
 import { GenreItemComponent } from './components/genre-item/genre-item.component';
+import { GenreListComponent } from './components/genre-list/genre-list.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchComponent } from './components/search/search.component';
-
 
 @NgModule({
   declarations: [
-    BookComponent,
     BookCardComponent,
+    BookComponent,
     DragDropBooksComponent,
     GenreItemComponent,
     GenreListComponent,
     NavbarComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule,
     DragDropModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
-    BookComponent,
     BookCardComponent,
+    BookComponent,
     DragDropBooksComponent,
     GenreItemComponent,
     GenreListComponent,
     NavbarComponent,
-    SearchComponent
+    SearchComponent,
   ]
 })
 export class SharedModule { }

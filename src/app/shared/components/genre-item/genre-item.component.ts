@@ -12,10 +12,7 @@ export class GenreItemComponent {
 
   constructor(){}
 
-  ngOnInit(): void { 
-  }
-
-  onSelected(){
+  onSelected(): void{
     this.dataGenre.isSelected = !this.dataGenre.isSelected;
     this.selectetEmitter.emit(this.dataGenre.index);
   }

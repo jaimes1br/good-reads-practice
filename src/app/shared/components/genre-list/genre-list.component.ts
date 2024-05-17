@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataGenre } from '@core/models/DataGenre.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { DataGenre } from '@core/models/DataGenre.model';
   templateUrl: './genre-list.component.html',
   styleUrls: ['./genre-list.component.scss']
 })
-export class GenreListComponent {
+export class GenreListComponent implements OnInit{
   
   selectedItem!: DataGenre;  
   @Input() listGenres: DataGenre[] = [];
@@ -14,11 +14,9 @@ export class GenreListComponent {
 
   ngOnInit(): void {
     this.selectedItem = this.listGenres.filter(genre => genre.isSelected)[0];
-    // console.log('Se crea con -> ', this.selectedItem);
-    
   }
 
-  onChangeSelected(indexSelected: number){
+  onChangeSelected(indexSelected: number): void{
     const prevIndex = this.listGenres.indexOf(this.selectedItem);
     if(prevIndex !== -1){
       this.listGenres[prevIndex].isSelected = false;

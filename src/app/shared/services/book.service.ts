@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BooksNumbers, Library, LibraryElement, SearchBooks } from '@core/models/Books.model';
-import { DataGenre } from '@core/models/DataGenre.model';
-import { MyListBooks } from '@core/models/StorageBooks.model';
 import { of, tap, BehaviorSubject ,map, Observable } from 'rxjs';
-import { BOOKS } from '../../data/books';
-import { GenresService } from './genres.service';
 
+import { BooksNumbers, Library, LibraryElement, SearchBooks } from '@core/models/Books.model';
+import { MyListBooks } from '@core/models/StorageBooks.model';
+import { BOOKS } from '../../data/books';
  
 @Injectable({
   providedIn: 'root'
@@ -48,7 +46,7 @@ export class BookService {
       );
   }
   
-  getMyListISBN(){  
+  getMyListISBN(): void{  
     const localListISBN = localStorage.getItem('myListISBN');
     
     if(!!localListISBN){
@@ -61,7 +59,7 @@ export class BookService {
     }
   }
 
-  updateAvailableList(){
+  updateAvailableList(): void{
     const tempAllBooks = this.librarySubject.getValue();
     
     if(!!tempAllBooks){
@@ -87,7 +85,6 @@ export class BookService {
   }
 
   removeBookOnMyList(isbn: string): void{
-    console.log('hola remove ' + isbn);
     this.myListISBN = this.myListISBN.filter(isbnNum => isbnNum !== isbn);
     localStorage.setItem('myListISBN',JSON.stringify(this.myListISBN));
 
@@ -115,7 +112,7 @@ export class BookService {
     }
   }
 
-  setBooksNumbers(){
+  setBooksNumbers(): void{
     const total = this.librarySubject.getValue()!['library'].slice().length;
     const totalMyList = this.myListISBN.length; 
 
@@ -126,7 +123,7 @@ export class BookService {
     });
   }
 
-  getMyBookListLocal(){
+  getMyBookListLocal(): void{
     const myBookListLocal = localStorage.getItem('myBookList');
     
     if(!!myBookListLocal){
@@ -142,7 +139,7 @@ export class BookService {
     this.myBooksListSubject.next(this.myBookList);
   }
 
-  getSearchBooks(term:string) {
+  getSearchBooks(term:string): void {
     const mylibraryObj = this.myBooksListSubject.getValue();
     let myLibrary: LibraryElement[] = [];
     if(mylibraryObj){
@@ -178,7 +175,6 @@ export class BookService {
     });
 
     this.availableBooksSearchedSubject.next(search);
-
   }
 
 }

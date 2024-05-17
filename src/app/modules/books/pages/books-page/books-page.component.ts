@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { Book, LibraryElement } from '@core/models/Books.model';
 import { DataGenre } from '@core/models/DataGenre.model';
 import { BookService } from '@shared/services/book.service';
-import { Subscription } from 'rxjs';
-import { GenresService } from '../../../../shared/services/genres.service';
+import { GenresService } from '@shared/services/genres.service';
 
 @Component({
   selector: 'goodReads-books-page',
@@ -23,8 +24,7 @@ export class BooksPageComponent implements OnInit, OnDestroy{
   totalBooksGenre: number = 0;
   filterName: string = 'Todos';
 
-  librarySub!: Subscription;
-  booksNumbersSub!: Subscription;
+  listSubs: Subscription[] = [];
 
   maxPages: number = 0
   numberOfPages: number = 0;
@@ -32,7 +32,7 @@ export class BooksPageComponent implements OnInit, OnDestroy{
   constructor(public bookService: BookService, private genresService:GenresService){}
  
   ngOnInit(): void {
-    this.librarySub = this.bookService.availableBooks$.subscribe(library => {            
+    const librarySub = this.bookService.availableBooks$.subscribe(library => {            
       if(library){
         this.listGenres = this.genresService.getGenresList;
         
@@ -43,15 +43,17 @@ export class BooksPageComponent implements OnInit, OnDestroy{
       }  
     });
 
-    this.booksNumbersSub = this.bookService.bookNumbers$.subscribe(({available,myList,maxPages}) => {
+    const numbersSub = this.bookService.bookNumbers$.subscribe(({available,myList,maxPages}) => {
       this.totalAvailable = available;
       this.totalMyList = myList;
       this.numberOfPages = maxPages
       this.maxPages = maxPages;
     });
+
+    this.listSubs = [librarySub,numbersSub];
   }
 
-  onFilterChange(filter: string){
+  onFilterChange(filter: string): void{
     const tempAvailable = this.library.filter(({book}) => book.pages <= this.numberOfPages);;
     this.totalAvailable = tempAvailable.length;
     
@@ -67,11 +69,11 @@ export class BooksPageComponent implements OnInit, OnDestroy{
     }
   }
 
-  trackByFn(index:number, item: LibraryElement){
+  trackByFn(index:number, item: LibraryElement): string{
     return item.book.ISBN
   }
 
-  removeBook({book, selected}: {book: Book, selected: boolean}){
+  removeBook({book, selected}: {book: Book, selected: boolean}): void{
     setTimeout(() => {
       (selected)
         ? this.bookService.addBookOnMyList(book.ISBN)
@@ -80,9 +82,7 @@ export class BooksPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if(this.librarySub) this.librarySub.unsubscribe();
-    if(this.booksNumbersSub) this.booksNumbersSub.unsubscribe();
-
+    this.listSubs.forEach(o => o.unsubscribe());
     this.genresService.resetGenresList();
   }
 }

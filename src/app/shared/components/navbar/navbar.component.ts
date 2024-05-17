@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BookService } from '@shared/services/book.service';
 @Component({
   selector: 'goodReads-navbar',
