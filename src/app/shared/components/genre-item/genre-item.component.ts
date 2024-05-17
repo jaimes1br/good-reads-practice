@@ -10,7 +10,7 @@ import { DataGenre } from '@core/models/DataGenre.model';
     imports: [NgClass]
 })
 export class GenreItemComponent {
-  @Input() dataGenre: DataGenre = { name: '', isSelected: false, index: 0}
+  @Input({required: true}) dataGenre!: DataGenre;
   @Output() selectetEmitter = new EventEmitter<number>();
 
   onSelected(): void{

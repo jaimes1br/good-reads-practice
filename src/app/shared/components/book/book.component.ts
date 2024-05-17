@@ -15,19 +15,7 @@ export class BookComponent {
   imgLoaded:boolean = false;
   @Input() isOnSearch: boolean = false;
   @Input() isSelected: boolean = false;
-  @Input() book: Book = {    
-      title:    '',
-      pages:    0,
-      genre:    '',
-      cover:    '',
-      synopsis: '',
-      year:     0,
-      ISBN:     '',
-      author: {
-        name:       '',
-        otherBooks: []
-    }
-  };
+  @Input({required: true}) book!: Book;
   
   @Output() remove = new EventEmitter();
   

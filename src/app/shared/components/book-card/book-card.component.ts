@@ -13,5 +13,5 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
 export class BookCardComponent {
   
   imgLoaded: boolean = false;
-  @Input() book!: LibraryElement;
+  @Input({required: true}) book!: LibraryElement;
 }

@@ -13,9 +13,9 @@ import { BookCardComponent } from '../book-card/book-card.component';
 })
 export class DragDropBooksComponent {
 
-  @Input() pending: LibraryElement[] = [];
-  @Input() reading: LibraryElement[] = [];
-  @Input() read: LibraryElement[] = [];
+  @Input({required: true}) pending: LibraryElement[] = [];
+  @Input({required: true}) reading: LibraryElement[] = [];
+  @Input({required: true}) read: LibraryElement[] = [];
   
   drop(event: CdkDragDrop<LibraryElement[]>): void{
     if (event.previousContainer === event.container) {

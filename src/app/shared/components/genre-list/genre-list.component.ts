@@ -13,7 +13,7 @@ import { GenreItemComponent } from '../genre-item/genre-item.component';
 export class GenreListComponent implements OnInit{
   
   selectedItem!: DataGenre;  
-  @Input() listGenres: DataGenre[] = [];
+  @Input({required: true}) listGenres: DataGenre[] = [];
   @Output() filterSelectedEvent = new EventEmitter<string>();
 
   ngOnInit(): void {
