@@ -52,6 +52,14 @@ html,body {
 
 .anim-del-2{ animation-delay: 1s;}
 
+.gradient-bg-animation{
+    background: rgb(189, 189, 189);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(209, 172, 137) 0%, rgb(253, 208, 171) 48%, rgb(250, 222, 222) 100%);
+    background-size: 300% 100%;
+    animation: gradient 2s ease infinite;
+    -webkit-animation: gradient 2s ease infinite;
+}
+
  @-webkit-keyframes fade-in-top {
     0% {
         opacity:   0;
@@ -135,6 +143,18 @@ html,body {
         -webkit-transform: translateY(0);
                 transform: translateY(0);
         opacity: 1;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }
   

@@ -8,5 +8,6 @@ import { LibraryElement } from '@core/models/Books.model';
 })
 export class BookCardComponent {
   
+  imgLoaded: boolean = false;
   @Input() book!: LibraryElement;
 }

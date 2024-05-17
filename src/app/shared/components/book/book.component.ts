@@ -9,7 +9,7 @@ import { Book } from '@core/models/Books.model';
 export class BookComponent {
    
   isRemoved: boolean = false;
-  
+  imgLoaded:boolean = false;
   @Input() isOnSearch: boolean = false;
   @Input() isSelected: boolean = false;
   @Input() book: Book = {    

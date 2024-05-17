@@ -1,7 +1,16 @@
 <div 
     class="d-flex flex-column px-2 py-1 animate__animated"
     [ngClass]="{ 'animate__bounceOut': isRemoved && !isOnSearch}">
-    <img class="mx-auto my-1 book-img" [src]="book.cover" [alt]="book.title">
+    <img 
+        class="mx-auto my-1 book-img" 
+        [src]="book.cover" 
+        [alt]="book.title"
+        (load)="imgLoaded = true"
+        [hidden]="!imgLoaded">
+    <div 
+        class="container-placeholder gradient-bg-animation"
+        *ngIf="!imgLoaded">
+    </div>
     <div class="px-2">
         <p class="mt-2 mb-0 text-truncate"><strong>{{book.title}}</strong></p>
         <div class="d-flex align-items-center book-autor-container">
