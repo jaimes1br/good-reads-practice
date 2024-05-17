@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '@core/models/Books.model';
 
 @Component({
@@ -25,20 +25,13 @@ export class BookComponent {
         otherBooks: []
     }
   };
-
-  // constructor(private bookService: BookService){}
-
-  ngOnInit(): void {
-  }
-
+  
+  @Output() remove = new EventEmitter();
+  
   onSelectedBook(){
     this.isSelected = !this.isSelected;
     this.isRemoved = true;
-    // setTimeout(() => {
-    //   (this.isSelected)
-    //     ? this.bookService.addBookOnMyList(this.book.ISBN)
-    //     : this.bookService.removeBookOnMyList(this.book.ISBN)
-      
-    // }, 900);
+
+    this.remove.emit({book:this.book, selected: this.isSelected})
   }
 }

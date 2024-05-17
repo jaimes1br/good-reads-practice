@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BooksNumbers, Library, LibraryElement, SearchBooks } from '@core/models/Books.model';
+import { DataGenre } from '@core/models/DataGenre.model';
+import { MyListBooks } from '@core/models/StorageBooks.model';
 import { of, tap, BehaviorSubject ,map, Observable } from 'rxjs';
 import { BOOKS } from '../../data/books';
-import { BooksNumbers, Library, LibraryElement, SearchBooks } from '../../core/models/Books.model';
-import { DataGenre } from '../../core/models/DataGenre.model';
-import { MyListBooks } from '../../core/models/StorageBooks.model';
+
  
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class BookService {
   myBooksListSubject = new BehaviorSubject<MyListBooks | null>(null);
   myBooksList$: Observable<MyListBooks | null> = this.myBooksListSubject.asObservable();
 
-  genresListSubject = new BehaviorSubject<DataGenre[]>([]);
+  genresListSubject:BehaviorSubject<DataGenre[]> = new BehaviorSubject<DataGenre[]>([]);
   genresList$: Observable<DataGenre[]> = this.genresListSubject.asObservable();
   
   bookNumbersSubject = new BehaviorSubject<BooksNumbers>({available: 0,myList: 0, maxPages: 0});

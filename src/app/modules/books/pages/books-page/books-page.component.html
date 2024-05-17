@@ -44,8 +44,9 @@
         <div class="px-2 mb-3 row scroll">
             <goodReads-book 
                 class="col-3" 
-                *ngFor="let book of listAvailableBooks" 
+                *ngFor="let book of listAvailableBooks; trackBy: trackByFn" 
                 [book]="book.book"
+                (remove)="removeBook($event)"
             />
             <div 
                 *ngIf="!listAvailableBooks.length" 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
+import { BooksNumbers } from '@core/models/Books.model';
+import { BookService } from '@shared/services/book.service';
 import { Subscription } from 'rxjs';
-import { BookService } from '../../services/book.service';
-import { BooksNumbers } from '../../../core/models/Books.model';
-
 @Component({
   selector: 'goodReads-navbar',
   templateUrl: './navbar.component.html',

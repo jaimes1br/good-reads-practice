@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BooksNumbers, LibraryElement } from '@core/models/Books.model';
+import { Book, BooksNumbers, LibraryElement } from '@core/models/Books.model';
 import { DataGenre } from '@core/models/DataGenre.model';
 import { MyListBooks } from '@core/models/StorageBooks.model';
-import { Subscription } from 'rxjs';
 import { BookService } from '@shared/services/book.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'goodReads-my-list-page',
@@ -61,6 +61,18 @@ export class MyListPageComponent {
           ...this.allList.read
         ];
     }
+  }
+
+  trackByFn(index:number, item: LibraryElement){
+    return item.book.ISBN
+  }
+
+  removeBook({book, selected}: {book: Book, selected: boolean}){
+    setTimeout(() => {
+      (selected)
+        ? this.bookService.addBookOnMyList(book.ISBN)
+        : this.bookService.removeBookOnMyList(book.ISBN)
+    }, 650);
   }
 
   ngOnDestroy(): void {
